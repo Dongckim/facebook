@@ -1,12 +1,18 @@
-import styled from "styled-components";
-import Body from "../components/Body";
-import Header from "../components/Header";
+import Body from "../BodyComponent/Body";
+import Header from "../HeaderComponents/Header";
+import RightSideList from "../RightSideList/RightSideList";
+import SideList from "../SideList/SideList";
+
 
 const Main = (props) => {
     return (
         <Header>
-            <Body>
-            </Body>
+            <SideList>
+                <RightSideList>
+                    <Body>
+                    </Body> 
+                </RightSideList>
+            </SideList>
         </Header>
     )
 }

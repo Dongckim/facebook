@@ -1,0 +1,30 @@
+{
+  "contacts": [
+    {
+      "id" : 1, 
+      "name" : "양인서"
+    },
+    {
+      "id" : 2, 
+      "name" : "윤재혁"
+    },
+    {
+      "id" : 3, 
+      "name" : "태윤희"
+    },
+    {
+      "id" : 4, 
+      "name" : "김동찬"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
