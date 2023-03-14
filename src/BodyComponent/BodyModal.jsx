@@ -7,9 +7,10 @@ const BodyInput = ({children}) => {
 
     return(
         <>
-            <STinput onClick={()=>{setOpen(!open)}}>Dongchan Alex Kim님, 무슨 생각을 하고 계신가요?
-            {children}
+            <STinput onClick={()=>{setOpen(!open)}}>
+                Dongchan Alex Kim님, 무슨 생각을 하고 계신가요?
             </STinput> 
+            {children}
         </>
        
     )

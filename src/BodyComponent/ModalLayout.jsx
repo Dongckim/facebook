@@ -5,8 +5,8 @@ const ModalLayout = ({children}) => {
     return ( 
         <>
             <Layout>
+                {children}
             </Layout>
-            {children}
         </>
         
         )
@@ -15,9 +15,9 @@ const ModalLayout = ({children}) => {
 export default ModalLayout;
 
 const Layout = styled.div`
+    border: 2px solid black;
     position: fixed;
-    background-color: #ededed;
-    opacity : 0.7;
+    background-color: rgb(255,255,255, 0.7);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
