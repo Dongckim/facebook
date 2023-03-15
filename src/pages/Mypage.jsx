@@ -5,7 +5,10 @@ const Mypage = () => {
 
     return(
         <Header>
-            <div style={{paddingTop:'60px'}}>Mypage에요</div>
+            <div style={{paddingTop:'60px'}}>
+                <input type="text" />
+                <input/>
+            </div>
             <Link to={'/'}>돌아가기</Link>
         </Header>
     )

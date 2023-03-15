@@ -11,7 +11,9 @@ const UpdateInput = ({children}) => {
 
     return(
         <Stdiv>
-            <Stinput placeholder="수정할 사항을 입력해주세요"  type = 'text' defaultValue = {value} onChange={onchangeHandler}/>
+            <Stinput placeholder="수정할 사항을 입력해주세요"  
+            defaultValue = {value} 
+            onChange={onchangeHandler}/>
         </Stdiv>
     )
 }

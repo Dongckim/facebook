@@ -7,8 +7,13 @@ import HeaderInput from "./HeaderInput";
 import { HeaderButton, HeaderMypage } from "./HeaderButton";
 import { StyledCircleButton } from "./StyledCircleButton";
 import HeaderSection from "./HeaderSection";
+import { useNavigate } from "react-router-dom";
 
 const Header = ({children}) => {
+    const navigate = useNavigate();
+    const onClickHandler = () => {
+        navigate('/')
+    }
 
     return (
         <>
@@ -22,9 +27,11 @@ const Header = ({children}) => {
                     <HeaderInput/>
                 </Aligndiv>
                 <Aligndiv theme={'HeaderMidSection'}>
-                    <HeaderSection>
-                        <AiFillHome/>
-                    </HeaderSection>
+                    <span onClick={onClickHandler}>
+                        <HeaderSection>
+                            <AiFillHome/>
+                        </HeaderSection>
+                    </span>
                     <HeaderSection>
                         <FaUserFriends/>
                     </HeaderSection>

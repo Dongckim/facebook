@@ -26,7 +26,6 @@ const BodyContentHeader = () => {
         }))
         setBody('')
         setOpen(!open)
-        window.location.reload();
     }
 
     const onSubmitHandler = (e) => {

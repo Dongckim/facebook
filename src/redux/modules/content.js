@@ -21,33 +21,44 @@ export const getContentsThunk = createAsyncThunk(
 
 export const addList = createAsyncThunk(
     "addList",
-    async (newList) => {
-        return await axios.post('http://localhost:4000/comments',newList)
+    async (newList, thunk) => {
+        try{
+            const {data} = await axios.post('http://localhost:4000/comments',newList)
+            return thunk.fulfillWithValue(newList)
+        }catch(error){
+            return thunk.rejectWithValue(error)
+        }
     }
 );
 
 export const deleteList = createAsyncThunk(
     "deleteList",
-    async (listid) => {
-        return await axios.delete(`http://localhost:4000/comments/${listid}`)
+    async (listid, thunk) => {
+        try{
+            await axios.delete(`http://localhost:4000/comments/${listid}`)
+            return thunk.fulfillWithValue(listid)
+        }catch(error){
+            return thunk.rejectWithValue(error)
+        }
     }
 );
 
 export const updateList = createAsyncThunk(
     "updateList",
-    async(listid, action) => {
-        return await axios.patch(`http://localhost:4000/comments/${listid.id}`, listid)
+    async(listid, thunk) => {
+        try{
+            await axios.patch(`http://localhost:4000/comments/${listid.id}`, listid)
+            return thunk.fulfillWithValue(listid)
+        }catch(error){
+            return thunk.rejectWithValue(error)
+        }
     }
 )
 
 export const contentSlice = createSlice({
     name: 'content',
     initialState,
-    reducers:{
-        addComment : (state,action) => {
-            state.content = [...state.content, action.payload]
-        }
-    },
+    reducers:{},
     extraReducers:{
         [getContentsThunk.pending] : (state,action) => {
             state.isLoading = true;
@@ -60,6 +71,25 @@ export const contentSlice = createSlice({
         [getContentsThunk.rejected] : (state,action) => {
             state.isLoading = false;
             state.error = action.payload;
+        },
+        [addList.fulfilled] : (state, action) => {
+            state.isLoading = false;
+            state.content = [...state.content, action.payload]
+        },
+        [deleteList.fulfilled] : (state, action) => {
+            state.isLoading = false;
+            state.content = state.content.filter((item) => action.payload !== item.id)
+        },
+        [updateList.fulfilled] : (state, action) => {
+            state.isLoading = false;
+            state.content = state.content.map((item) => {
+                if(item.id == action.payload.id){
+                    item.body = action.payload.body
+                    return item
+                }else{
+                    return item
+                }
+            })
         }
     }
 })

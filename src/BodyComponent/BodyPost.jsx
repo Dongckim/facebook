@@ -16,13 +16,12 @@ export const InputContext = createContext();
 
 const BodyPost = ({children}) => {
     const dispatch = useDispatch();
-    const { content, isLoading, error } = useSelector((state) => state.content);
+    const { content } = useSelector((state) => state.content);
     const [input, setInput] = useState('');
     const [show, setShow] = useState(false)
 
     const onClickDeleteHandler = (id) => {
         dispatch(deleteList(id))
-        window.location.reload()
     }
 
     const onUpdateHandler = (id) => {
@@ -31,7 +30,9 @@ const BodyPost = ({children}) => {
         setInput(value)
     }
 
-    const onSubmitUpdateHandler = (id) => {
+    const onSubmitUpdateHandler = (id, event) => {
+        event.preventDefault();
+        setShow(!show)        
         dispatch(updateList({
             id,
             body : input,
@@ -60,7 +61,7 @@ const BodyPost = ({children}) => {
                 </div>
                 <BorderLine2/>
                 {show ? (
-                    <form onSubmit={()=>{onSubmitUpdateHandler(children[0])}}>
+                    <form onSubmit={(event)=>{onSubmitUpdateHandler(children[0], event)}}>
                     <UpdateInput>{children[0]}</UpdateInput> 
                     </form>
                 ) 
