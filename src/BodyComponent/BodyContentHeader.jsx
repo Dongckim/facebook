@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import uuid from "react-uuid";
 import styled, { css } from "styled-components";
@@ -29,8 +29,12 @@ const BodyContentHeader = () => {
         window.location.reload();
     }
 
+    const onSubmitHandler = (e) => {
+        e.preventDefault();
+    }
+
     return (
-        <>
+        <form onSubmit={onSubmitHandler}>
             <div style={{display:'flex'}}>
                 <Stdiv>
                     게시물 만들기
@@ -47,12 +51,13 @@ const BodyContentHeader = () => {
             </Wrapper>
             <Wrapper theme={'input'}>
                 <STinput placeholder="Dongchan Alex Kim님, 무슨 생각을 하고 계신가요?"
-                 onChange={onChangeHandler}/>
+                 onChange={onChangeHandler}
+                 />
             </Wrapper>
             <Wrapper>
                 <Button onClick={onAddbody}>게시</Button>
             </Wrapper>
-        </>
+        </form>
     )
 
 }
@@ -127,9 +132,7 @@ const STinput = styled.textarea`
     border: none;
     padding-top: 5px;
     font-size: 25px;
-    :active{
-        border: none;
-    }
+    flex-wrap: nowrap;
 `
 
 const Button = styled.div`

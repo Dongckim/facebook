@@ -7,40 +7,64 @@ import { BorderLine } from "./Body";
 import { ProfileWrapper, Selector} from "./BodyContentHeader"
 import BodyProfile from "./BodyProfile"
 import BodySection from "./BodySection";
-import { useDispatch } from "react-redux";
-import { deleteList } from "../redux/modules/content";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteList, updateList } from "../redux/modules/content";
+import { createContext, useContext, useState } from "react";
+import UpdateInput from "./UpdateInput";
+
+export const InputContext = createContext();
 
 const BodyPost = ({children}) => {
     const dispatch = useDispatch();
+    const { content, isLoading, error } = useSelector((state) => state.content);
+    const [input, setInput] = useState('');
+    const [show, setShow] = useState(false)
 
     const onClickDeleteHandler = (id) => {
         dispatch(deleteList(id))
-        window.location.reload();
+        window.location.reload()
+    }
+
+    const onUpdateHandler = () => {
+        setShow(!show)
+    }
+
+    const onSubmitUpdateHandler = (id) => {
+        dispatch(updateList({
+            id,
+            body : input,
+        }))
     }
 
     return(
-        <PostWrapper>
-            <Wrapper theme={'profile'}>
-                <div style={{display:"flex"}}>
-                <BodyProfile/>
-                <ProfileWrapper>
-                    <span>Dongchan Alex Kim</span>
-                    <Selector>2시간 전</Selector>
-                </ProfileWrapper>
+        <InputContext.Provider value={{input, setInput, content}}>
+            <PostWrapper>
+                <Wrapper theme={'profile'}>
+                    <div style={{display:"flex"}}>
+                    <BodyProfile/>
+                    <ProfileWrapper>
+                        <span>Dongchan Alex Kim</span>
+                        <Selector>2시간 전</Selector>
+                    </ProfileWrapper>
+                    </div>
+                    <STcancel onClick={()=> {onClickDeleteHandler(children[0])}}><IoTrashOutline/></STcancel>
+                </Wrapper>
+                <STspan>{children[1]}</STspan>
+                <BorderLine/>
+                <div style={{display:"flex",marginTop:'5px'}}>
+                    <BodySection><AiOutlineLike/>좋아요</BodySection>
+                    <span onClick={onUpdateHandler}><BodySection><GoComment/>수정하기</BodySection></span>
+                    <BodySection><TbShare3/>공유하기</BodySection> 
                 </div>
-                <STcancel onClick={()=> {onClickDeleteHandler(children[0])}}><IoTrashOutline/></STcancel>
-            </Wrapper>
-            <STspan>{children[1]}</STspan>
-            <BorderLine/>
-            <div style={{display:"flex",marginTop:'5px'}}>
-                <BodySection><AiOutlineLike/>좋아요</BodySection>
-                <BodySection><GoComment/>댓글달기</BodySection>
-                <BodySection><TbShare3/>공유하기</BodySection> 
-            </div>
-            <BorderLine2/>
-            
-        </PostWrapper>
-        
+                <BorderLine2/>
+                {show ? (
+                    <form onSubmit={()=>{onSubmitUpdateHandler(children[0])}}>
+                    <UpdateInput>{children[0]}</UpdateInput> 
+                    </form>
+                ) 
+                : null}
+            </PostWrapper>
+        </InputContext.Provider>
     )
 }
 

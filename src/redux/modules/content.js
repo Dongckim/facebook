@@ -36,7 +36,7 @@ export const deleteList = createAsyncThunk(
 export const updateList = createAsyncThunk(
     "updateList",
     async(listid, action) => {
-        return await axios.patch(`http://localhost:4000/comments/${listid}`,action)
+        return await axios.patch(`http://localhost:4000/comments/${listid.id}`, listid)
     }
 )
 
