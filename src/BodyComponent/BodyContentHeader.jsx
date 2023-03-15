@@ -1,14 +1,34 @@
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import styled, { css, StyleSheetManager } from "styled-components";
+import { useDispatch } from "react-redux";
+import uuid from "react-uuid";
+import styled, { css } from "styled-components";
+import { addList } from "../redux/modules/content";
 import { openContext } from "./Body";
 import BodyProfile from "./BodyProfile";
 
+
 const BodyContentHeader = () => {
-    const {open, setOpen} = useContext(openContext)
+    const {open, setOpen, body, setBody} = useContext(openContext)
+    const dispatch = useDispatch();
+    
     const cancelHandler = () => {
         setOpen(!open)
     }
+ 
+    const onChangeHandler = (event) => {
+        setBody(event.target.value)
+    }
+
+    const onAddbody = () => {
+        dispatch(addList({
+            id:uuid(),
+            body,
+        }))
+        setBody('')
+        setOpen(!open)
+        window.location.reload();
+    }
+
     return (
         <>
             <div style={{display:'flex'}}>
@@ -26,10 +46,11 @@ const BodyContentHeader = () => {
                 </ProfileWrapper>
             </Wrapper>
             <Wrapper theme={'input'}>
-                <STinput/>
+                <STinput placeholder="Dongchan Alex Kim님, 무슨 생각을 하고 계신가요?"
+                 onChange={onChangeHandler}/>
             </Wrapper>
             <Wrapper>
-                <Button>게시</Button>
+                <Button onClick={onAddbody}>게시</Button>
             </Wrapper>
         </>
     )
@@ -64,7 +85,7 @@ const BorderLine = styled.div`
     border-bottom:1px solid #d0d0d0;
 `
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
     margin: 15px;
     display: flex;
     align-items: center;
@@ -81,11 +102,11 @@ const Wrapper = styled.div`
         }
     }}
 `
-const ProfileWrapper = styled.div`
+export const ProfileWrapper = styled.div`
     display: block;
     font-weight: bold;
 `
-const Selector = styled.div`
+export const Selector = styled.div`
     background-color: #ededed;
     border-radius: 5px;
     display: flex;
@@ -98,21 +119,24 @@ const Selector = styled.div`
     margin-top: 5px;
 `
 
-const STinput = styled.input`
+const STinput = styled.textarea`
     display: flex;
     justify-content: center;
     width: 100vmax;
     height: 170px;
     border: none;
-    text-indent: 0.5em;
-    flex-wrap: wrap;
+    padding-top: 5px;
+    font-size: 25px;
+    :active{
+        border: none;
+    }
 `
 
 const Button = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius:10px;
+    border-radius:8px;
     width: 100vmin;
     height: 40px;
     background-color: #4267B2;

@@ -1,13 +1,16 @@
-import { useContext, useState } from "react"
+import { useContext} from "react"
 import styled from "styled-components"
 import { openContext } from "./Body"
 
 const BodyInput = ({children}) => {
     const { open, setOpen} = useContext(openContext)
+    const modalHandler = () => {
+        setOpen(!open)
+    }
 
     return(
         <>
-            <STinput onClick={()=>{setOpen(!open)}}>
+            <STinput onClick={modalHandler}>
                 Dongchan Alex Kim님, 무슨 생각을 하고 계신가요?
             </STinput> 
             {children}

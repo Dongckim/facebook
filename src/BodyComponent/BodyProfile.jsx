@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { IoMdPerson } from "react-icons/io";
 import styled from "styled-components";
 

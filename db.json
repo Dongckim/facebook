@@ -1,27 +1,38 @@
 {
   "contacts": [
     {
-      "id" : 1, 
-      "name" : "양인서"
+      "id": 1,
+      "name": "양인서"
     },
     {
-      "id" : 2, 
-      "name" : "윤재혁"
+      "id": 2,
+      "name": "윤재혁"
     },
     {
-      "id" : 3, 
-      "name" : "태윤희"
+      "id": 3,
+      "name": "태윤희"
     },
     {
-      "id" : 4, 
-      "name" : "김동찬"
+      "id": 4,
+      "name": "김동찬"
     }
   ],
   "comments": [
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "id": 3,
+      "body": "Wait mark, I'm coming"
+    },
+    {
+      "id": 4,
+      "body": "Mark Juckerburg, the greatest pioneer on 21th century"
+    },
+    {
+      "id": 5,
+      "body": "Perhaps the feelings that we experience when we are in love represent a normal state. Being in love shows a person who he should be."
+    },
+    {
+      "id": "543fc449-5ee9-abee-6dc0-87a06b9680b5",
+      "body": "김동찬입니다."
     }
   ],
   "profile": {

@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import BodyContentHeader from "./BodyContentHeader";
 import BodyModal from "./BodyModal";
@@ -9,20 +9,30 @@ import ModalLayout from "./ModalLayout";
 import {BsCameraReelsFill} from 'react-icons/bs'
 import {AiFillPicture} from 'react-icons/ai'
 import {FaRegSmile} from 'react-icons/fa'
+import { useDispatch, useSelector } from "react-redux";
+import { getContentsThunk } from "../redux/modules/content";
+import BodyPost from "./BodyPost";
 
 
 export const openContext = createContext();
 
 const Body = () => {
     const [open, setOpen] = useState(false)
-    console.log(open)
+    const [body, setBody] = useState('')
+    const { content, isLoading, error } = useSelector((state) => state.content);
+    const dispatch = useDispatch();
+    
+    useEffect(()=> {
+        dispatch(getContentsThunk());
+    },[])
+
 
     return (
+    <openContext.Provider value = {{open, setOpen, body, setBody}}>
         <STdiv> 
             <Wrapper>
                 <div style={{display:"flex"}}>
                 <BodyProfile/>
-                <openContext.Provider value = {{open, setOpen}}>
                     <BodyModal>
                     {open ? (
                         <ModalLayout>
@@ -32,7 +42,7 @@ const Body = () => {
                         </ModalLayout>
                     ):null}
                     </BodyModal>
-                </openContext.Provider>
+               
                 </div>
                 <BorderLine/>
                 <SectionWrapper>
@@ -41,23 +51,16 @@ const Body = () => {
                     <BodySection smile><FaRegSmile/>기분/활동</BodySection>
                 </SectionWrapper>
             </Wrapper>
-            
-            <Wrapper>
-                게시물
-            </Wrapper>
-            <Wrapper>
-                게시물
-            </Wrapper>
-            <Wrapper>
-                게시물
-            </Wrapper>
-            <Wrapper>
-                게시물
-            </Wrapper>
-            <Wrapper>
-                게시물
-            </Wrapper>
-        </STdiv>
+            {content.map((item)=> {
+                return (
+                        <BodyPost key={item.id} >
+                           {item.id}
+                           {item.body} 
+                        </BodyPost>
+                )
+            })}  
+        </STdiv> 
+    </openContext.Provider>
     )
 }
 
@@ -81,7 +84,7 @@ const Wrapper = styled.div`
     border-radius : 12px;
     box-shadow : 2px 2px #d4d4d4;
 `
-const BorderLine = styled.div`
+export const BorderLine = styled.div`
     margin-top: 20px;
     border-bottom:1px solid #d0d0d0;
     width: 550px;
