@@ -25,8 +25,10 @@ const BodyPost = ({children}) => {
         window.location.reload()
     }
 
-    const onUpdateHandler = () => {
+    const onUpdateHandler = (id) => {
+        const value = content.find((item)=>item.id == id).body
         setShow(!show)
+        setInput(value)
     }
 
     const onSubmitUpdateHandler = (id) => {
@@ -53,7 +55,7 @@ const BodyPost = ({children}) => {
                 <BorderLine/>
                 <div style={{display:"flex",marginTop:'5px'}}>
                     <BodySection><AiOutlineLike/>좋아요</BodySection>
-                    <span onClick={onUpdateHandler}><BodySection><GoComment/>수정하기</BodySection></span>
+                    <span onClick={()=>{onUpdateHandler(children[0])}}><BodySection><GoComment/>수정하기</BodySection></span>
                     <BodySection><TbShare3/>공유하기</BodySection> 
                 </div>
                 <BorderLine2/>
