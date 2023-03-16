@@ -13,7 +13,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getContentsThunk } from "../redux/modules/content";
 import BodyPost from "./BodyPost";
 
-
 export const openContext = createContext();
 
 const Body = () => {
@@ -25,7 +24,6 @@ const Body = () => {
     useEffect(()=> {
         dispatch(getContentsThunk());
     },[])
-
 
     return (
     <openContext.Provider value = {{open, setOpen, body, setBody}}>
@@ -63,7 +61,6 @@ const Body = () => {
     </openContext.Provider>
     )
 }
-
 export default Body;
 
 const STdiv = styled.div`

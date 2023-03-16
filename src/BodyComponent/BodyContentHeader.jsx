@@ -20,20 +20,26 @@ const BodyContentHeader = () => {
     }
 
     const onAddbody = () => {
-        dispatch(addList({
+        if (body.length < 10){
+            alert('Please write at least 10 characters')
+        }else{
+            dispatch(addList({
             id:uuid(),
             body,
         }))
         setBody('')
         setOpen(!open)
+        }
     }
+        
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
+        
     }
 
     return (
-        <form onSubmit={onSubmitHandler}>
+        <div>
             <div style={{display:'flex'}}>
                 <Stdiv>
                     게시물 만들기
@@ -48,15 +54,19 @@ const BodyContentHeader = () => {
                     <Selector>전체 공개</Selector>
                 </ProfileWrapper>
             </Wrapper>
-            <Wrapper theme={'input'}>
-                <STinput placeholder="Dongchan Alex Kim님, 무슨 생각을 하고 계신가요?"
-                 onChange={onChangeHandler}
-                 />
-            </Wrapper>
-            <Wrapper>
-                <Button onClick={onAddbody}>게시</Button>
-            </Wrapper>
-        </form>
+            <form onSubmit={onSubmitHandler}>
+                <Wrapper theme={'input'}>
+                    <STinput 
+                    placeholder="Dongchan Alex Kim님, 무슨 생각을 하고 계신가요?"
+                    required
+                    onChange={onChangeHandler}
+                    />
+                </Wrapper>
+                <Wrapper>
+                    <Button onClick={onAddbody}>게시</Button>
+                </Wrapper>
+            </form>
+        </div>
     )
 
 }
@@ -134,7 +144,7 @@ const STinput = styled.textarea`
     flex-wrap: nowrap;
 `
 
-const Button = styled.div`
+const Button = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -142,6 +152,7 @@ const Button = styled.div`
     width: 100vmin;
     height: 40px;
     background-color: #4267B2;
+    border: none;
     color: #ffffff;
     cursor: pointer;
     :hover{

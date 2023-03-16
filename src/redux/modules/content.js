@@ -11,7 +11,8 @@ export const getContentsThunk = createAsyncThunk(
     "getContents",
     async (payload, thunk) => {
         try{
-            const { data } = await axios.get('http://localhost:4000/comments')
+            // const { data } = await axios.get(`${process.env.REACT_APP_COMMENTS}`)
+            const { data } = await axios.get(`${process.env.REACT_APP_SERVER_KEY}/comments`)
             return thunk.fulfillWithValue(data)
         }catch(error){
             return thunk.rejectWithValue(error)
@@ -23,7 +24,7 @@ export const addList = createAsyncThunk(
     "addList",
     async (newList, thunk) => {
         try{
-            const {data} = await axios.post('http://localhost:4000/comments',newList)
+            const {data} = await axios.post(`${process.env.REACT_APP_SERVER_KEY}/comments`,newList)
             return thunk.fulfillWithValue(newList)
         }catch(error){
             return thunk.rejectWithValue(error)
@@ -35,7 +36,7 @@ export const deleteList = createAsyncThunk(
     "deleteList",
     async (listid, thunk) => {
         try{
-            await axios.delete(`http://localhost:4000/comments/${listid}`)
+            await axios.delete(`${process.env.REACT_APP_SERVER_KEY}/comments/${listid}`)
             return thunk.fulfillWithValue(listid)
         }catch(error){
             return thunk.rejectWithValue(error)
@@ -47,7 +48,7 @@ export const updateList = createAsyncThunk(
     "updateList",
     async(listid, thunk) => {
         try{
-            await axios.patch(`http://localhost:4000/comments/${listid.id}`, listid)
+            await axios.patch(`${process.env.REACT_APP_SERVER_KEY}/comments/${listid.id}`, listid)
             return thunk.fulfillWithValue(listid)
         }catch(error){
             return thunk.rejectWithValue(error)
