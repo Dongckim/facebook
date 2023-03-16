@@ -43,7 +43,22 @@
       "body": "\"It's true I don't know much about the players here, but they definitely know who I am.\"- Zlatan Ibrahimovic"
     }
   ],
-  "profile": {
-    "name": "typicode"
-  }
+  "users": [
+    {
+      "id": "dongckim",
+      "password": "jjhappy0809"
+    },
+    {
+      "id": "jjdc0809",
+      "password": "Kimdongchan1"
+    },
+    {
+      "id": "21-76060248",
+      "password": "jjhappy0809^^"
+    },
+    {
+      "id": "fnYJKJV",
+      "password": ""
+    }
+  ]
 }

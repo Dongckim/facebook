@@ -95,5 +95,4 @@ export const contentSlice = createSlice({
     }
 })
 
-export const {addComment} = contentSlice.actions;
 export default contentSlice.reducer;
