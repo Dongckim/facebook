@@ -19,6 +19,7 @@
     "react-uuid": "^2.0.0",
     "redux-devtools-extension": "^2.13.9",
     "styled-components": "^5.3.8",
+    "universal-cookie": "^4.0.4",
     "web-vitals": "^2.1.0"
   },
   "scripts": {

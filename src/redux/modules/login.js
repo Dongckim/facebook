@@ -1,20 +1,35 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { setCookie } from "../../api/cookie";
 
 const initialState = {
     users : [],
     error:null,
-    isLoading:false,
+    isLogin:false,
 }
 
-export const addUser = createAsyncThunk(
+export const __addUser = createAsyncThunk(
     "addUser",
     async(newuser, thunk) => {
         try{
-            await axios.post(`${process.env.REACT_APP_SERVER_KEY}/users`,newuser)
+            await axios.post('http://3.38.191.164/register',newuser)
             return thunk.fulfillWithValue(newuser)
         }catch(error){
-            alert('아이디가 이미 존재합니다.')
+            return thunk.rejectWithValue(error)
+        }
+    }
+)
+
+export const __loginUser = createAsyncThunk(
+    "loginUser",
+    async(thatUser, thunk)=> {
+        try{
+            const response = await axios.post('http://3.38.191.164/login',thatUser)
+            const acessToken = response.data.token  
+            setCookie('token', acessToken)
+            return thunk.fulfillWithValue(thatUser)
+        }catch(error){
             return thunk.rejectWithValue(error)
         }
     }
@@ -25,10 +40,25 @@ export const userSlice = createSlice({
     initialState,
     reducers:{},
     extraReducers:{
-        [addUser.fulfilled] : (state, action) => {
+        [__addUser.fulfilled] : (state, action) => {
+            state.isLogin = false;
             state.users = [...state.users, action.payload]
-            document.location.reload('/');
-        }
+            window.location.reload();
+            alert('Welcome to Facebook!');
+            
+        },
+        [__addUser.rejected] : (state, action) => {
+            state.isLogin = false;
+            window.alert(action.payload.response.data.message)
+        },
+        [__loginUser.fulfilled] : (state, action) => {
+            state.isLogin = true;
+            alert('Welcome to Facebook!');
+        },
+        [__loginUser.rejected] : (state, action) => {
+            state.isLogin = false;
+            window.alert(action.payload.response.data.message)
+        },
     }
 })
 

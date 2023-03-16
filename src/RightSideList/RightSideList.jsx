@@ -37,7 +37,7 @@ const STdiv = styled.div`
     :hover{
         overflow: auto;
     }
-    z-index: 0;
+    z-index: 0.2;
 `
 const STLabel = styled.div`
     font-weight: bold;

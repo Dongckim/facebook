@@ -21,7 +21,7 @@ const Stdiv = styled.div`
     display: flex;
     align-items: center;
     gap: 15px;
-
+    z-index: 0.2;
     padding-left: 20px;
     margin-left: 20px;
     :hover{

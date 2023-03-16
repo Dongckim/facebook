@@ -38,5 +38,5 @@ const STinput = styled.div`
     :active{
         background-color: #c0c0c0;
     }
-    z-index: 0;
+    z-index: 0.2;
 `

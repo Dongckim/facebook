@@ -49,14 +49,17 @@ const Body = () => {
                     <BodySection smile><FaRegSmile/>기분/활동</BodySection>
                 </SectionWrapper>
             </Wrapper>
-            {content.map((item)=> {
-                return (
-                        <BodyPost key={item.id} >
-                           {item.id}
-                           {item.body} 
-                        </BodyPost>
-                )
-            })}  
+            <div>
+                {content.map((item)=> {
+                    return (
+                            <BodyPost key={item.id} >
+                            {item.id}
+                            {item.body} 
+                            </BodyPost>
+                    )
+                })}   
+            </div>
+            
         </STdiv> 
     </openContext.Provider>
     )

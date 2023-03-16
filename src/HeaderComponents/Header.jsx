@@ -73,7 +73,7 @@ const STdiv = styled.div`
     position: fixed;
     box-shadow: 0 3px 4px -4px black;
     width:100vw;
-    z-index: 1;
+    z-index: 2;
 `
 const Aligndiv = styled.div`
     display: flex;
